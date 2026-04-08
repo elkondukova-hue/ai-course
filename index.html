@@ -918,14 +918,13 @@
   </div>
 </div>
 
-
 <!-- CTA BOTTOM -->
 <section class="cta-bottom" id="enroll">
   <h2 class="section-title">Освойте ИИ-инструменты для научной работы</h2>
   <p>Отправьте заявку — укажите ваши ФИО и номер группы.</p>
   <br>
   <button id="sendBtn" class="btn-white" style="border:none;cursor:pointer;">Отправить заявку</button>
-  <p style="font-size: 14px; color: var(--gray); margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7;">Если письмо не открылось автоматически, отправьте заявку вручную на <strong style="color: var(--navy);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7c3d7c88ad5cecad4c8d2e7cac6cecb89d5d2">[email&#160;protected]</a></strong> (копия — <strong style="color: var(--navy);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7510191e1a1b11001e1a0314351218141c195b161a18">[email&#160;protected]</a></strong>), указав ФИО и номер группы.</p>
+  <p style="font-size: 14px; color: var(--gray); margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7;">Если письмо не открылось автоматически, отправьте заявку вручную на адрес <strong id="e1" style="color: var(--navy);"></strong> (копия — <strong id="e2" style="color: var(--navy);"></strong>), указав ФИО и номер группы.</p>
   <div style="max-width: 600px; margin: 40px auto 0; text-align: left; background: var(--white); border: 1px solid var(--soft); padding: 32px;">
     <p style="font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 12px;">Для оформления договора</p>
     <p style="font-size: 15px; color: #4A4A4A; line-height: 1.7; margin-bottom: 16px;">Отправьте сканы следующих документов на почту ДПО:</p>
@@ -934,7 +933,7 @@
       <li>СНИЛС</li>
       <li>Диплом о среднем профессиональном или высшем образовании (при наличии)</li>
     </ul>
-    <p style="font-size: 15px; color: #4A4A4A;">Почта ДПО: <strong style="color: var(--accent);" id="dpoEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0266726d2f706b6f716d77426f636b6e2c7077">[email&#160;protected]</a></strong></p>
+    <p style="font-size: 15px; color: #4A4A4A;">Почта ДПО: <strong style="color: var(--accent);" id="e3"></strong></p>
   </div>
 </section>
 
@@ -947,16 +946,37 @@
   <div class="footer-right">© 2026</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Make all sections visible immediately (no animation dependency)
+<script>
+  // Make all sections visible
   document.querySelectorAll('.always-visible').forEach(function(el) {
     el.style.opacity = '1';
     el.style.transform = 'translateY(0)';
   });
 
-  // Email button - opens Gmail compose in browser
+  // Build emails from parts so no filter can detect them
+  var a1 = 'dpo-rimsou', a2 = 'elkondukova';
+  var d1 = 'mail.ru', d2 = 'gmail.com';
+  var at = String.fromCharCode(64); // this is the @ symbol
+  var full1 = a1 + at + d1;
+  var full2 = a2 + at + d2;
+
+  // Show emails on page
+  document.getElementById('e1').textContent = full1;
+  document.getElementById('e2').textContent = full2;
+  document.getElementById('e3').textContent = full1;
+
+  // Button opens Gmail compose
   var btn = document.getElementById('sendBtn');
   if (btn) {
     btn.onclick = function() {
       var url = 'https://mail.google.com/mail/?view=cm'
-      
+        + '&to=' + full1
+        + '&cc=' + full2
+        + '&su=' + encodeURIComponent('Заявка на курс ИИ-ассистент исследователя')
+        + '&body=' + encodeURIComponent('ФИО:\nНомер группы:\n\nДокументы для оформления договора (сканы):\n— Ксерокопия паспорта с пропиской\n— СНИЛС\n— Диплом о СПО или ВО (при наличии)');
+      window.open(url, '_blank');
+    };
+  }
+</script>
+</body>
+</html>
